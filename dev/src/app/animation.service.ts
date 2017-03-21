@@ -1,24 +1,31 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+
+
+//import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
+
+
 import { Animation } from './animation';
 
 @Injectable()
 export class AnimationService {
-   anims: Array<Animation> = new Array();
-   anim: Animation;
-   getAnimations(): Animation[] {
-        //todo
-        this.anims[0]= {
-            nid: 1,
-            titre: 'Apprendre avec les jeux sérieux',
-            categorie: 'Conférence',
-            doc: 'string',
-            horaires: '10h-16h',
-            jour: 31,
-            mois: 'Mars',
-            type: 'Mercredi du numérique',
-            image: 'string',
-            infos: 'description plus complète de cette animation et de ses contenus'
-        };
-        return this.anims;
+
+   //private animationsUrl = 'https://www.reseau-canope.fr/atelier-hauts-de-seine/drupal7/?q=gateway/views/animations.json;
+   private animationsUrl = 'json/animations.json';
+   constructor(private http: Http) {}
+
+   
+    getAllAnimations(): Promise<Animation[]> {
+        console.log('http request begining ...');
+        return this.http.get(this.animationsUrl)
+               .toPromise()
+               .then(response => response.json() as Animation[])
+               .catch(this.handleError);
     }
+    private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 }

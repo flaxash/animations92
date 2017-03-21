@@ -13,12 +13,15 @@ var animation_service_1 = require('./animation.service');
 var AppComponent = (function () {
     function AppComponent(animationService) {
         this.animationService = animationService;
-        this.title = 'Programme des animations - Atelier Canopé 92';
+        this.titre = 'Programme des animations';
+        this.sstitre = 'Atelier Canopé 92';
     }
     AppComponent.prototype.getAnimations = function () {
-        this.animations = this.animationService.getAnimations();
-        //.then(animations => this.animations = animations);
-        this.anim = this.animations[0];
+        var _this = this;
+        this.animationService
+            .getAllAnimations()
+            .then(function (animations) { return _this.animations = animations; });
+        //console.log('animations : ',this.animations);
     };
     AppComponent.prototype.ngOnInit = function () {
         this.getAnimations();
@@ -26,7 +29,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "<h1>{{title}}</h1><h2>{{anim.titre}}</h2>",
+            templateUrl: './app/app.component.html',
             providers: [animation_service_1.AnimationService]
         }), 
         __metadata('design:paramtypes', [animation_service_1.AnimationService])

@@ -10,15 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
+var http_1 = require('@angular/http');
+var flex_layout_1 = require('@angular/flex-layout');
 var app_component_1 = require('./app.component');
+var animation_service_1 = require('./animation.service');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
+            imports: [platform_browser_1.BrowserModule,
+                http_1.HttpModule,
+                flex_layout_1.FlexLayoutModule],
             declarations: [app_component_1.AppComponent],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent],
+            providers: [animation_service_1.AnimationService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

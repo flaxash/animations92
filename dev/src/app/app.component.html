@@ -1,1 +1,50 @@
-<h1>{{title}}</h1><h2>{{anim.titre}}</h2>
+<div class="searchbox" 
+fxLayout="row"
+fxLayoutAlign="center"
+fxLayoutGap="50px">
+    <div fxFlex="420px">
+       <span class="glyphicon glyphicon-search" aria-hidden="true"></span> <input class="find" type="search"  placeholder="Rechercher dans les animations"  name="search_terms" >
+    </div>
+    <div class="filtres" fxFlex="330px">
+        <input type="checkbox" id="cbox1" value="checkbox1" checked><label>Numérique éducatif</label>
+        <input type="checkbox" id="cbox2" value="checkbox2" checked><label>Évènement</label>
+        <input type="checkbox" id="cbox3" value="checkbox3" checked><label>Ressources éducatives et culturelles</label>
+    </div>   
+</div>
+<div class="container"
+     fxLayout="row"
+     fxLayoutGap="30px" 
+     fxLayoutWrap="wrap"
+     fxLayoutAlign="center">
+	<div fxFlex="380px"   *ngFor="let animation of animations">
+        <div class="panneau" >
+            <div *ngIf="animation.field_categorie=='TICE'" class="ribbon-wrapper-green"><div class="ribbon-green">{{animation.field_categorie}}</div></div>
+            <div class="top_panneau"
+                fxLayout="row"
+                fxLayoutGap="8px"
+                fxLayoutWrap="nowrap">
+                <div fxFlex="80%" class="titre">{{animation.title}}</div>
+                <img class="image img-rounded" [src]="animation.field_image" />
+            </div>
+            
+            <div fxflex="100%" class="infos">
+                <div fxFlex="100%" class="description">{{animation.body}}</div>
+                <button type="button" class="btn btn-info plusinfos"> > en savoir plus</button>
+            </div><br/><br/>
+            <div  class="evenement"
+                fxLayout="row"
+                fxLayoutGap="4px"
+                fxLayoutWrap="nowrap"
+                fxFlexAlign="center">
+                <div fxFlex class="date">{{animation.field_jour}} {{animation.field_mois}}</div>
+                <div fxFlex="25%" class="horaires">   {{animation.field_horaire}}</div>
+                <div fxFlex="95px">
+                    <button type="button" class="btn btn-primary inscription">inscription</button>
+                </div>
+            </div>
+            <div class=lieu>
+                <div fxFlex="100%">lieu : {{animation.field_lieu}}</div>
+            </div>
+        </div>
+    </div>
+</div>
